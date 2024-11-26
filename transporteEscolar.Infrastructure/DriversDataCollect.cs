@@ -9,7 +9,7 @@ public class DriverData : GetDataInterface<Driver>
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Student (id, name, salary, license, vehicleId) VALUES('{element.name}', '{element.salary}, '{element.license}', {element.vehicleId});", connection1);
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Drivers (id, name, salary, license, vehicleId) VALUES('{element.name}', {element.salary}, '{element.license}', {element.vehicleId});", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }

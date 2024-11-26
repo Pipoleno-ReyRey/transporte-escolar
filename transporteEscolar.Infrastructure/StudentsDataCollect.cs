@@ -9,7 +9,7 @@ public class StudentsData : GetDataInterface<Student>
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Student (id, name, address, telefono, email, WayId) VALUES ('{element.name}', '{element.address}', '{element.telefono}', '{element.email}', {element.WayId});", connection1);
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Student(id, name, address, telefono, email, WayId) VALUES('{element.name}', '{element.address}', '{element.telefono}', '{element.email}', {element.WayId});", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }
