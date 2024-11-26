@@ -1,13 +1,13 @@
 using transporteEscolar.Domain;
 
 
-public interface GetStudentsInterface
+public interface GetDataInterface<R>
 {
-    Student GetStudent(int id);
-    IEnumerable<Student> AllStudents();
-    void AddStudent(Student student);
-    void DeleteStudent(int id);
-    void UpdateStudent(Student student);
+    R Get(int id);
+    IEnumerable<R> All();
+    void Add(R element);
+    void Delete(int id);
+    void Update(R element);
 
 }
 

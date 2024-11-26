@@ -2,19 +2,19 @@ using transporteEscolar.Domain;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-public class StudentsData : GetStudentsInterface
+public class StudentsData : GetDataInterface<Student>
 {
     public string connection = "server=localhost;user=root;database=transporteEscolar;password=xxxxxxx";
-    public void AddStudent(Student student)
+    public void Add(Student element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Student (id, name, address, telefono, email, WayId) VALUES ('{student.name}', '{student.address}', '{student.telefono}', '{student.email}', {student.WayId});", connection1);
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Student (id, name, address, telefono, email, WayId) VALUES ('{element.name}', '{element.address}', '{element.telefono}', '{element.email}', {element.WayId});", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }
 
-    public IEnumerable<Student> AllStudents()
+    public IEnumerable<Student> All()
     {
         List<Student> students = new List<Student>();
         MySqlConnection connector = new MySqlConnection(connection);
@@ -42,7 +42,7 @@ public class StudentsData : GetStudentsInterface
         return students;
     }
 
-    public void DeleteStudent(int id)
+    public void Delete(int id)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
@@ -51,12 +51,12 @@ public class StudentsData : GetStudentsInterface
         connection1.CloseAsync();
     }
 
-    public Student GetStudent(int id)
+    public Student Get(int id)
     {
         Student student = new Student();
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"select * from Dish where id = {id};", connection1);
+        MySqlCommand command = new MySqlCommand($"select * from Students where id = {id};", connection1);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
         {
@@ -73,11 +73,11 @@ public class StudentsData : GetStudentsInterface
         return student;
     }
 
-    public void UpdateStudent(Student student)
+    public void Update(Student element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Student SET name = '{student.name}', address = '{student.address}', telefono = '{student.telefono}', email = '{student.email}', WayId = {student.WayId} WHERE id ={student.id};", connection1);
+        MySqlCommand command = new MySqlCommand($"UPDATE Student SET name = '{element.name}', address = '{element.address}', telefono = '{element.telefono}', email = '{element.email}', WayId = {element.WayId} WHERE id ={element.id};", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }
