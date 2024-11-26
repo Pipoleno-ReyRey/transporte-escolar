@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj": {}
+    "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj": {
+    "D:\\transporte-escolar\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj",
+        "projectUniqueName": "D:\\transporte-escolar\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj",
         "projectName": "transporteEscolar.Domain",
-        "projectPath": "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj",
+        "projectPath": "D:\\transporte-escolar\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj",
         "packagesPath": "C:\\Users\\wapo2\\.nuget\\packages\\",
-        "outputPath": "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Domain\\obj\\",
+        "outputPath": "D:\\transporte-escolar\\transporteEscolar.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj": {
+    "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj",
+        "projectUniqueName": "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj",
         "projectName": "transporteEscolar.Infrastructure",
-        "projectPath": "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj",
+        "projectPath": "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\wapo2\\.nuget\\packages\\",
-        "outputPath": "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Infrastructure\\obj\\",
+        "outputPath": "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -98,8 +98,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj": {
-                "projectPath": "D:\\VSCODE\\transporte_escolar_proyecto\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj"
+              "D:\\transporte-escolar\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj": {
+                "projectPath": "D:\\transporte-escolar\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj"
               }
             }
           }
@@ -118,6 +118,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.2, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[9.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
