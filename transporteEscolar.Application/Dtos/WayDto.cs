@@ -1,4 +1,4 @@
-public class Ways
+public class WayDto
 {
     public int id {set; get;}
     public string? origin {set; get;}

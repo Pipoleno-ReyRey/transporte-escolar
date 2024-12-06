@@ -1,7 +1,7 @@
 using transporteEscolar.Domain;
 
 
-public interface GetDataInterface<R>
+public interface DataInterface<R>
 {
     R Get(int id);
     IEnumerable<R> All();

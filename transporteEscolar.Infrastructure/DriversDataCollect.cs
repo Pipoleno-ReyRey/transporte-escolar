@@ -2,14 +2,14 @@
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-public class DriverData : GetDataInterface<Driver>
+public class DriverData : DataInterface<Driver>
 {
-    public string connection = "server=localhost;user=root;database=transporteEscolar;password=xxxxxxx";
+    public string connection = "server=localhost;user=root;database=transporteEscolar;password=reynaldo066512";
     public void Add(Driver element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Drivers (id, name, salary, license, vehicleId) VALUES('{element.name}', {element.salary}, '{element.license}', {element.vehicleId});", connection1);
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Drivers (id, name, salary, license, vehicle) VALUES('{element.name}', {element.salary}, '{element.license}', '{element.vehicle}');", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }
@@ -32,9 +32,7 @@ public class DriverData : GetDataInterface<Driver>
             float.TryParse(reader["salary"].ToString(), out salary);
             driver.salary = salary;
             driver.license = reader["telefono"].ToString();
-            var vehicleId = 0;
-            Int32.TryParse(reader["vehicleId"].ToString(), out vehicleId);
-            driver.vehicleId = vehicleId;
+            driver.vehicle = reader["vehicle"].ToString();
             
             drivers.Add(driver);
         }
@@ -67,9 +65,7 @@ public class DriverData : GetDataInterface<Driver>
             float.TryParse(reader["salary"].ToString(), out salary);
             driver.salary = salary;
             driver.license = reader["telefono"].ToString();
-            var vehicleId = 0;
-            Int32.TryParse(reader["vehicleId"].ToString(), out vehicleId);
-            driver.vehicleId = vehicleId;
+            driver.vehicle = reader["vehicle"].ToString();
         }
         connection1.CloseAsync();
         return driver;
@@ -79,7 +75,7 @@ public class DriverData : GetDataInterface<Driver>
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Drivers SET name = '{element.name}', salary = {element.salary}, telefono = '{element.license}', vehicleId = {element.vehicleId} WHERE id = {element.id};", connection1);
+        MySqlCommand command = new MySqlCommand($"UPDATE Drivers SET name = '{element.name}', salary = {element.salary}, telefono = '{element.license}', vehicleId = '{element.vehicle}' WHERE id = {element.id};", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }

@@ -2,14 +2,14 @@ using transporteEscolar.Domain;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-public class PayData : GetDataInterface<Pays>
+public class PayData : DataInterface<Pays>
 {
-    public string connection = "server=localhost;user=root;database=transporteEscolar;password=xxxxxxx";
+    public string connection = "server=localhost;user=root;database=transporteEscolar;password=reynaldo066512";
     public void Add(Pays element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Drivers (studentId, count, date, state) VALUES({element.studentId}, {element.count}, '{element.datePay}', {element.state});", connection1);
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Pays (studentId, count, date, state) VALUES({element.studentId}, {element.count}, '{element.datePay}', {element.state});", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }
@@ -82,7 +82,7 @@ public class PayData : GetDataInterface<Pays>
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Drivers SET studentId = {element.studentId}, count = {element.count}, date = '{element.datePay}', state = {element.state} WHERE id = {element.id};", connection1);
+        MySqlCommand command = new MySqlCommand($"UPDATE Pays SET studentId = {element.studentId}, count = {element.count}, date = '{element.datePay}', state = {element.state} WHERE id = {element.id};", connection1);
         command.ExecuteNonQueryAsync();
         connection1.CloseAsync();
     }
