@@ -5,20 +5,20 @@ using MySql.Data.MySqlClient;
 public class PayData : DataInterface<Pays>
 {
     public string connection = "server=localhost;user=root;database=transporteEscolar;password=reynaldo066512";
-    public void Add(Pays element)
+    public async Task Add(Pays element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Pays (studentId, count, date, state) VALUES({element.studentId}, {element.count}, '{element.datePay}', {element.state});", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Pays (studentId, count, datePay) VALUES({element.studentId}, {element.count}, NOW());", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
-    public IEnumerable<Pays> All()
+    public async Task<IEnumerable<Pays>> All()
     {
         List<Pays> pays = new List<Pays>();
         MySqlConnection connector = new MySqlConnection(connection);
-        connector.OpenAsync();
+        await connector.OpenAsync();
         MySqlCommand command = new MySqlCommand("select * from Pays", connector);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
@@ -33,31 +33,28 @@ public class PayData : DataInterface<Pays>
             float count;;
             float.TryParse(reader["count"].ToString(), out count);
             pay.count = count;
-            pay.datePay = reader.GetDateTime("date");
-            bool state;
-            bool.TryParse(reader["state"].ToString(), out state);
-            pay.state = state;            
+            pay.datePay = reader.GetDateTime("datePay");           
             pays.Add(pay);
         }
-        connector.CloseAsync();
+        await connector.CloseAsync();
 
         return pays;
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
+        await connection1.OpenAsync();
         MySqlCommand command = new MySqlCommand($"Delete from Pays where id = {id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
-    public Pays Get(int id)
+    public async Task<Pays> Get(int id)
     {
         Pays pay = new Pays();
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
+        await connection1.OpenAsync();
         MySqlCommand command = new MySqlCommand($"select * from Pays where id = {id};", connection1);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
@@ -70,21 +67,18 @@ public class PayData : DataInterface<Pays>
             float.TryParse(reader["count"].ToString(), out count);
             pay.count = count;
             pay.datePay = reader.GetDateTime("date");
-            bool state;
-            bool.TryParse(reader["state"].ToString(), out state);
-            pay.state = state;
         }
-        connection1.CloseAsync();
+        await connection1.CloseAsync();
         return pay;
     }
 
-    public void Update(Pays element)
+    public async Task Update(Pays element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Pays SET studentId = {element.studentId}, count = {element.count}, date = '{element.datePay}', state = {element.state} WHERE id = {element.id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"UPDATE Pays SET studentId = {element.studentId}, count = {element.count}, date = NOW() WHERE id = {element.id};", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
 }

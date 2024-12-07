@@ -1,0 +1,12 @@
+D:\transporte-escolar\transporteEscolar.Domain\bin\Debug\net8.0\transporteEscolar.Domain.deps.json
+D:\transporte-escolar\transporteEscolar.Domain\bin\Debug\net8.0\transporteEscolar.Domain.dll
+D:\transporte-escolar\transporteEscolar.Domain\bin\Debug\net8.0\transporteEscolar.Domain.pdb
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\transporteEscolar.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\transporteEscolar.Domain.AssemblyInfoInputs.cache
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\transporteEscolar.Domain.AssemblyInfo.cs
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\transporteEscolar.Domain.csproj.CoreCompileInputs.cache
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\transporteEscolar.Domain.sourcelink.json
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\transporteEscolar.Domain.dll
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\refint\transporteEscolar.Domain.dll
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\transporteEscolar.Domain.pdb
+D:\transporte-escolar\transporteEscolar.Domain\obj\Debug\net8.0\ref\transporteEscolar.Domain.dll

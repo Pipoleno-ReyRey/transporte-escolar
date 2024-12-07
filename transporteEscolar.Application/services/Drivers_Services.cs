@@ -1,8 +1,8 @@
 using transporteEscolar.Domain;
 
-public class Drivers_Services : DataInterface<DriverDto>
+public class Drivers_Services : ServicesInterface<DriverDto>
 {
-    public Result Add(DriverDto element)
+    public async Task<Result> Add(DriverDto element)
     {
         if (string.IsNullOrWhiteSpace(element.name) || 
             element.salary <= 0 ||
@@ -11,10 +11,7 @@ public class Drivers_Services : DataInterface<DriverDto>
         {
             return new Result(false, "Todos los campos deben ser completados correctamente.");
         }
-        else if(element.vehicle != "carro" || element.vehicle != "autobus" || element.vehicle != "minivan"){
-            return new Result(false, "el transporte debe ser carro, autobus o minivan");
-        }
-        else{
+        else if(element.vehicle == "carro" || element.vehicle == "bus" || element.vehicle == "camion"){
             Driver driver = new Driver();
             driver.name = element.name;
             driver.salary = element.salary;
@@ -22,17 +19,20 @@ public class Drivers_Services : DataInterface<DriverDto>
             driver.vehicle = element.vehicle;
             
             DriverData driversData = new DriverData();
-            driversData.Add(driver);
+            await driversData.Add(driver);
             return new Result(true, "agregado correctamente");
+        }else{
+            return new Result(false, "no fue agregado");
         }
     }
 
-    public IEnumerable<DriverDto> All()
+    public async Task<IEnumerable<DriverDto>> All()
     {
         List<DriverDto> drivers = new List<DriverDto>();
         DriverData DriverData = new DriverData();
-        foreach(Driver driver in DriverData.All()){
+        foreach(Driver driver in await DriverData.All()){
             DriverDto driverDto = new DriverDto();
+            driverDto.id = driver.id;
             driverDto.name = driver.name;
             driverDto.salary = driver.salary;
             driverDto.license = driver.license;
@@ -43,40 +43,54 @@ public class Drivers_Services : DataInterface<DriverDto>
         return drivers;
     }
 
-    public Result Delete(int id)
+    public async Task<Result> Delete(int id)
     {
         DriverData driverData = new DriverData();
-        if(driverData.All().Any(s => s.id != id)){
-            return new Result(false, "ese id no existe");
+        var driverDataAll = await driverData.All();
+        bool state = true;
+        string message = "";
+        foreach(Driver driver in driverDataAll){
+            if(driver.id == id){
+                await driverData.Delete(id);
+                state = true;
+                message = "conductor eliminado";
+                break;
+            }
+            else{
+                state = false;
+                message = "el conductor no pudo ser eliminado";
+            }
         }
-        else{
-            driverData.Delete(id);
-            return new Result(true, "eliminado correctamente");
-        }
+        
+        return new Result(state, message);
     }
 
-    public DriverDto Get(int id)
+    public async Task<DriverDto> Get(int id)
     {
         DriverDto driverDto = new DriverDto();
         DriverData DriverData = new DriverData();
-        if(DriverData.All().Any(s => s.id != id)){
-            driverDto.name = "no existe";
-            driverDto.salary = 0;
-            driverDto.license = "no existe";
-            driverDto.vehicle = "no existe";
+        var driverDataAll = await DriverData.All();
+        foreach(Driver driver in driverDataAll){
+            if(driver.id == id){
+                var driver1 = await DriverData.Get(id);
+                driverDto.id = id;
+                driverDto.name = driver1.name;
+                driverDto.salary = driver1.salary;
+                driverDto.license = driver1.license;
+                driverDto.vehicle = driver1.vehicle;
+                break;
+            }
+            else{
+                driverDto.name = "no existe";
+                driverDto.salary = 0;
+                driverDto.license = "no existe";
+                driverDto.vehicle = "no existe";        
+            }
         }
-        else{
-            var driver = DriverData.Get(id);
-            driverDto.name = driver.name;
-            driverDto.salary = driver.salary;
-            driverDto.license = driver.license;
-            driverDto.vehicle = driver.vehicle;           
-        }
-
         return driverDto;
     }
 
-    public Result Update(DriverDto element)
+    public async Task<Result> Update(DriverDto element, int id)
     {
         if (string.IsNullOrWhiteSpace(element.name) || 
             element.salary <= 0 ||
@@ -85,19 +99,24 @@ public class Drivers_Services : DataInterface<DriverDto>
         {
             return new Result(false, "Todos los campos deben ser completados correctamente.");
         }
-        else if(element.vehicle != "carro" || element.vehicle != "autobus" || element.vehicle != "minivan"){
-            return new Result(false, "el transporte debe ser carro, autobus o minivan");
+        else if(element.vehicle == "carro" || element.vehicle == "bus" || element.vehicle == "camion"){
+            DriverData driverData = new DriverData();
+            var driversAll = await driverData.All();
+            foreach(Driver driver in driversAll){
+            if(driver.id == id){
+                Driver driver1 = new Driver();
+                driver1.id = id;
+                driver1.name = element.name;
+                driver1.salary = element.salary;
+                driver1.license = element.license;
+                driver1.vehicle = element.vehicle;
+                await driverData.Update(driver1);
+                break;
+            }
         }
-        else{
-            Driver driver = new Driver();
-            driver.name = element.name;
-            driver.salary = element.salary;
-            driver.license = element.license;
-            driver.vehicle = element.vehicle;
-            
-            DriverData driversData = new DriverData();
-            driversData.Add(driver);
-            return new Result(true, "agregado correctamente");
+            return new Result(true, "el conductor fua actualizado");
+        } else{
+            return new Result(false, "el conductor no pudo ser actualizado");
         }
     }
 }

@@ -11,4 +11,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\transporteEscolar.Application\transporteEscolar.Application.csproj" />
+    <ProjectReference Include="..\transporteEscolar.Infrastructure\transporteEscolar.Infrastructure.csproj" />
+    <ProjectReference Include="..\transporteEscolar.Domain\transporteEscolar.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

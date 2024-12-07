@@ -5,20 +5,20 @@ using MySql.Data.MySqlClient;
 public class WaysData : DataInterface<Ways>
 {
     public string connection = "server=localhost;user=root;database=transporteEscolar;password=reynaldo066512";
-    public void Add(Ways element)
+    public async Task Add(Ways element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Ways (origin, destiny, time) VALUES('{element.origin}', '{element.destiny}', '{element.time}');", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Ways (origin, destiny, time, cost) VALUES('{element.origin}', '{element.destiny}', '{element.time}', {element.cost});", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
-    public IEnumerable<Ways> All()
+    public async Task<IEnumerable<Ways>> All()
     {
         List<Ways> ways = new List<Ways>();
         MySqlConnection connector = new MySqlConnection(connection);
-        connector.OpenAsync();
+        await connector.OpenAsync();
         MySqlCommand command = new MySqlCommand("select * from Ways", connector);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
@@ -32,27 +32,30 @@ public class WaysData : DataInterface<Ways>
             TimeOnly time = new TimeOnly();
             TimeOnly.TryParse(reader["time"].ToString(), out time);
             way.time = time;
+            float cost;
+            float.TryParse(reader["cost"].ToString(), out cost);
+            way.cost = cost;
             ways.Add(way);
         }
-        connector.CloseAsync();
+        await connector.CloseAsync();
 
         return ways;
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
+        await connection1.OpenAsync();
         MySqlCommand command = new MySqlCommand($"Delete from Ways where id = {id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
-    public Ways Get(int id)
+    public async Task<Ways> Get(int id)
     {
         Ways way = new Ways();
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
+        await connection1.OpenAsync();
         MySqlCommand command = new MySqlCommand($"select * from Pays where id = {id};", connection1);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
@@ -63,18 +66,21 @@ public class WaysData : DataInterface<Ways>
             TimeOnly time = new TimeOnly();
             TimeOnly.TryParse(reader["time"].ToString(), out time);
             way.time = time;
+            float cost;
+            float.TryParse(reader["cost"].ToString(), out cost);
+            way.cost = cost;
         }
-        connection1.CloseAsync();
+        await connection1.CloseAsync();
         return way;
     }
 
-    public void Update(Ways element)
+    public async Task Update(Ways element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Ways SET origin = '{element.origin}', destiny = '{element.destiny}', time = '{element.time}' WHERE id = {element.id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"UPDATE Ways SET origin = '{element.origin}', destiny = '{element.destiny}', time = '{element.time}', cost = {element.cost} WHERE id = {element.id};", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
 }

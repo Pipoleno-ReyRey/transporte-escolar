@@ -3,11 +3,19 @@ using transporteEscolar.Domain;
 
 public interface DataInterface<R>
 {
-    R Get(int id);
-    IEnumerable<R> All();
-    void Add(R element);
-    void Delete(int id);
-    void Update(R element);
+    Task<R> Get(int id);
+    Task<IEnumerable<R>> All();
+    Task Add(R element);
+    Task Delete(int id);
+    Task Update(R element);
 
+}
+
+public interface BillsInterface<R>
+{
+    Task Update(Bills bill);
+    Task Add(int studentId);
+    Task<R> Get(int id);
+    Task Delete(int StudentId);
 }
 

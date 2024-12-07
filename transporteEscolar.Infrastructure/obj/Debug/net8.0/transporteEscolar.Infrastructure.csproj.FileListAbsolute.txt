@@ -1,0 +1,16 @@
+D:\transporte-escolar\transporteEscolar.Infrastructure\bin\Debug\net8.0\transporteEscolar.Infrastructure.deps.json
+D:\transporte-escolar\transporteEscolar.Infrastructure\bin\Debug\net8.0\transporteEscolar.Infrastructure.dll
+D:\transporte-escolar\transporteEscolar.Infrastructure\bin\Debug\net8.0\transporteEscolar.Infrastructure.pdb
+D:\transporte-escolar\transporteEscolar.Infrastructure\bin\Debug\net8.0\transporteEscolar.Domain.dll
+D:\transporte-escolar\transporteEscolar.Infrastructure\bin\Debug\net8.0\transporteEscolar.Domain.pdb
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.csproj.AssemblyReference.cache
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.AssemblyInfoInputs.cache
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.AssemblyInfo.cs
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.csproj.CoreCompileInputs.cache
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.sourcelink.json
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transpor.950109B5.Up2Date
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.dll
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\refint\transporteEscolar.Infrastructure.dll
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\transporteEscolar.Infrastructure.pdb
+D:\transporte-escolar\transporteEscolar.Infrastructure\obj\Debug\net8.0\ref\transporteEscolar.Infrastructure.dll

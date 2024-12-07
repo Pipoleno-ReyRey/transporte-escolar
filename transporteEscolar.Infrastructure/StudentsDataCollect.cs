@@ -4,22 +4,22 @@ using MySql.Data.MySqlClient;
 
 public class StudentsData : DataInterface<Student>
 {
-    public string connection = "server=localhost;user=root;database=transporteEscolar;password=reynaldo066512";
-    public void Add(Student element)
+    public string connection = "host=localhost;user=root;database=transporteEscolar;password=reynaldo066512";
+    public async Task Add(Student element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Students(id, name, address, telefono, email, WayId) VALUES('{element.name}', '{element.address}', '{element.telefono}', '{element.email}', {element.WayId});", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Student(name, address, telefono, email, debt, WayId) VALUES('{element.name}', '{element.address}', '{element.telefono}', '{element.email}', 0, {element.WayId});", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
-    public IEnumerable<Student> All()
+    public async Task<IEnumerable<Student>> All()
     {
         List<Student> students = new List<Student>();
         MySqlConnection connector = new MySqlConnection(connection);
-        connector.OpenAsync();
-        MySqlCommand command = new MySqlCommand("select * from Students", connector);
+        await connector.OpenAsync();
+        MySqlCommand command = new MySqlCommand("select * from Student", connector);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
         {
@@ -31,32 +31,38 @@ public class StudentsData : DataInterface<Student>
             student.address = reader["address"].ToString();
             student.telefono = reader["telefono"].ToString();
             student.email = reader["email"].ToString();
+            var debt = 0f;
+            float.TryParse(reader["debt"].ToString(), out debt);
+            student.debt = debt;
             var WayId = 0;
-            Int32.TryParse(reader["price"].ToString(), out WayId);
+            Int32.TryParse(reader["WayId"].ToString(), out WayId);
             student.WayId = WayId;
             
             students.Add(student);
         }
-        connector.CloseAsync();
+        await connector.CloseAsync();
 
         return students;
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"Delete from Students where id = {id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        BillsData bill = new BillsData();
+        await bill.Delete(id);
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"Delete from Student where id = {id};", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
+        
     }
 
-    public Student Get(int id)
+    public async Task<Student> Get(int id)
     {
         Student student = new Student();
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"select * from Students where id = {id};", connection1);
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"select * from Student where id = {id};", connection1);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
         {
@@ -66,19 +72,22 @@ public class StudentsData : DataInterface<Student>
             student.telefono = reader["telefono"].ToString();
             student.email = reader["email"].ToString();
             var WayId = 0;
-            Int32.TryParse(reader["price"].ToString(), out WayId);
+            Int32.TryParse(reader["WayId"].ToString(), out WayId);
             student.WayId = WayId;
+            var debt = 0f;
+            float.TryParse(reader["debt"].ToString(), out debt);
+            student.debt = debt;
         }
-        connection1.CloseAsync();
+        await connection1.CloseAsync();
         return student;
     }
 
-    public void Update(Student element)
+    public async Task Update(Student element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Student SET name = '{element.name}', address = '{element.address}', telefono = '{element.telefono}', email = '{element.email}', WayId = {element.WayId} WHERE id ={element.id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"UPDATE Student SET name = '{element.name}', address = '{element.address}', telefono = '{element.telefono}', email = '{element.email}', debt = {element.debt}, WayId = {element.WayId} WHERE id = {element.id};", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 }

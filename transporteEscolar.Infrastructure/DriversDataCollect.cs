@@ -5,21 +5,21 @@ using MySql.Data.MySqlClient;
 public class DriverData : DataInterface<Driver>
 {
     public string connection = "server=localhost;user=root;database=transporteEscolar;password=reynaldo066512";
-    public void Add(Driver element)
+    public async Task Add(Driver element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Drivers (id, name, salary, license, vehicle) VALUES('{element.name}', {element.salary}, '{element.license}', '{element.vehicle}');", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Driver (name, salary, license, vehicle) VALUES('{element.name}', {element.salary}, '{element.license}', '{element.vehicle}');", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
-    public IEnumerable<Driver> All()
+    public async Task<IEnumerable<Driver>> All()
     {
         List<Driver> drivers = new List<Driver>();
         MySqlConnection connector = new MySqlConnection(connection);
-        connector.OpenAsync();
-        MySqlCommand command = new MySqlCommand("select * from Drivers", connector);
+        await connector.OpenAsync();
+        MySqlCommand command = new MySqlCommand("select * from Driver", connector);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
         {
@@ -31,31 +31,31 @@ public class DriverData : DataInterface<Driver>
             float salary = 0.0f;
             float.TryParse(reader["salary"].ToString(), out salary);
             driver.salary = salary;
-            driver.license = reader["telefono"].ToString();
+            driver.license = reader["license"].ToString();
             driver.vehicle = reader["vehicle"].ToString();
             
             drivers.Add(driver);
         }
-        connector.CloseAsync();
+        await connector.CloseAsync();
 
         return drivers;
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"Delete from Drivers where id = {id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"Delete from Driver where id = {id};", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
-    public Driver Get(int id)
+    public async Task<Driver> Get(int id)
     {
         Driver driver = new Driver();
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"select * from Drivers where id = {id};", connection1);
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"select * from Driver where id = {id};", connection1);
         MySqlDataReader reader = command.ExecuteReader();
         while (reader.Read())
         {
@@ -64,20 +64,20 @@ public class DriverData : DataInterface<Driver>
             float salary = 0.0f;
             float.TryParse(reader["salary"].ToString(), out salary);
             driver.salary = salary;
-            driver.license = reader["telefono"].ToString();
+            driver.license = reader["license"].ToString();
             driver.vehicle = reader["vehicle"].ToString();
         }
-        connection1.CloseAsync();
+        await connection1.CloseAsync();
         return driver;
     }
 
-    public void Update(Driver element)
+    public async Task Update(Driver element)
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
-        connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Drivers SET name = '{element.name}', salary = {element.salary}, telefono = '{element.license}', vehicleId = '{element.vehicle}' WHERE id = {element.id};", connection1);
-        command.ExecuteNonQueryAsync();
-        connection1.CloseAsync();
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"UPDATE Driver SET name = '{element.name}', salary = {element.salary}, license = '{element.license}', vehicle = '{element.vehicle}' WHERE id = {element.id};", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
     }
 
 }

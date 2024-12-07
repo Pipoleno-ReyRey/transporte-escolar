@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\transporteEscolar.API.props" />
+</Project>

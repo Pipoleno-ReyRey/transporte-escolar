@@ -4,4 +4,5 @@ public class Ways
     public string? origin {set; get;}
     public string? destiny {set; get;}
     public TimeOnly time {set; get;}
+    public float cost {set; get;}
 }
