@@ -33,8 +33,8 @@ namespace YourNamespace.Controllers
             }
         }
 
-        [HttpGet("GetByStudent")]
-        public async Task<IActionResult> GetPaysByStudent([FromQuery] int studentId)
+        [HttpGet("GetByStudent/{studentId}")]
+        public async Task<IActionResult> GetPaysByStudent(int studentId)
         {
             try
             {

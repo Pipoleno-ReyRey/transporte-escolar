@@ -4,9 +4,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddScoped<Students_Services>();
-builder.Services.AddScoped<Pays_Services>();
 builder.Services.AddScoped<Drivers_Services>();
-
+builder.Services.AddScoped<Ways_Services>();
+builder.Services.AddScoped<Pays_Services>();
 
 var app = builder.Build();
 

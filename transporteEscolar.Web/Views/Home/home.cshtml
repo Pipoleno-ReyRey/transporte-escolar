@@ -1,0 +1,130 @@
+@{
+    ViewData["Title"] = "Vista de Diseño";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #1E90FF, #FF6347);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            background-color: #28a745; 
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-grow: 1;
+            padding-top: 100px; 
+        }
+
+        .btn-go-to-students {
+            background-color: #c6cc23; 
+            color: #333;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-go-to-students:hover {
+            background-color: #FF8C00; 
+        }
+
+        .btn-go-to-drivers {
+            background-color: #44cb18; 
+            color: #333;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-go-to-drivers:hover {
+            background-color: #FF8C00; 
+        }
+
+        .btn-go-to-ways {
+            background-color: #17bfb7; 
+            color: #333;
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-go-to-ways:hover {
+            background-color: #FF8C00; 
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="title">Escolar Express</span>
+    </div>
+
+    <div class="content">
+        <a href="/Student/Index_student">
+            <button class="btn-go-to-students">Estudiantes</button>
+        </a>
+    </div>
+
+    <div class="content">
+        <a href="/Driver/Index_driver">
+            <button class="btn-go-to-drivers">Conductores</button>
+        </a>
+    </div>
+    
+    <div class="content">
+        <a href="/Way/Index_ways">
+            <button class="btn-go-to-ways">Rutas</button>
+        </a>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 Escolar Express</p>
+    </div>
+</body>
+</html>
+

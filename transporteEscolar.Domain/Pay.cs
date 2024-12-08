@@ -1,3 +1,5 @@
+namespace transporteEscolar.Domain;
+
 public class Pays
 {
     public int id {set; get;}

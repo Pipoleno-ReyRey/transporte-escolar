@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace YourNamespace.Controllers
 {
@@ -15,13 +13,14 @@ namespace YourNamespace.Controllers
             _driversService = driversService;
         }
 
-        [HttpPost("Add")]
-        public async Task<IActionResult> AddDriver([FromBody] DriverDto driverDto)
+        [HttpPost("{wayId}")]
+        public async Task<IActionResult> AddDriver([FromBody] DriverDto driverDto, int wayId)
         {
             try
             {
                 var result = await _driversService.Add(driverDto);
-                if(!result.success){
+                var result2 = await _driversService.AddDriverWayService(wayId);
+                if(!result.success && !result2.success){
                     return BadRequest(new{message = result.message});
                 }else{
                     return StatusCode(200, new{message = result.message});
@@ -34,7 +33,7 @@ namespace YourNamespace.Controllers
             }
         }
 
-        [HttpGet("All")]
+        [HttpGet]
         public async Task<IActionResult> GetAllDrivers()
         {
             try

@@ -1,5 +1,4 @@
 using transporteEscolar.Domain;
-
 public class Drivers_Services : ServicesInterface<DriverDto>
 {
     public async Task<Result> Add(DriverDto element)
@@ -11,7 +10,7 @@ public class Drivers_Services : ServicesInterface<DriverDto>
         {
             return new Result(false, "Todos los campos deben ser completados correctamente.");
         }
-        else if(element.vehicle == "carro" || element.vehicle == "bus" || element.vehicle == "camion"){
+        else if(element.vehicle == "carro" || element.vehicle == "bus" || element.vehicle == "minibus"){
             Driver driver = new Driver();
             driver.name = element.name;
             driver.salary = element.salary;
@@ -99,7 +98,7 @@ public class Drivers_Services : ServicesInterface<DriverDto>
         {
             return new Result(false, "Todos los campos deben ser completados correctamente.");
         }
-        else if(element.vehicle == "carro" || element.vehicle == "bus" || element.vehicle == "camion"){
+        else if(element.vehicle == "carro" || element.vehicle == "bus" || element.vehicle == "minibus"){
             DriverData driverData = new DriverData();
             var driversAll = await driverData.All();
             foreach(Driver driver in driversAll){
@@ -117,6 +116,30 @@ public class Drivers_Services : ServicesInterface<DriverDto>
             return new Result(true, "el conductor fua actualizado");
         } else{
             return new Result(false, "el conductor no pudo ser actualizado");
+        }
+    }
+
+    public async Task<Result> AddDriverWayService(int wayId)
+    {
+        if (wayId <= 0)
+        {
+            return new Result(false, "Debes ingresar el id de una ruta valida.");
+        }
+        else{
+            bool state = false;
+            string message = "el id de la ruta no existe";
+            DriverData driverData = new DriverData();
+            WaysData waysData = new WaysData();
+            var waysList = await waysData.GetDriverWays(wayId);
+            foreach(Ways way in waysList){
+                if(way.id == wayId){
+                    await driverData.AddDriverWay(wayId);
+                    state = true;
+                    message = "conductor agregado correctamente";
+                    break;
+                }
+            }
+            return new Result(state, message);
         }
     }
 }

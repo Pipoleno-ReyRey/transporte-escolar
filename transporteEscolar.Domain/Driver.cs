@@ -1,3 +1,5 @@
+namespace transporteEscolar.Domain;
+
 public class Driver{
     public int id {set; get;}
     public string? name {set; get;}

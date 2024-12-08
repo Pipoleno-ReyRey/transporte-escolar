@@ -18,30 +18,50 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\transporte-escolar\transporteEscolar.Web
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/transporte-escolar/transporteEscolar.Web/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[D:/transporte-escolar/transporteEscolar.Web/Views/Driver/drivers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyXGRyaXZlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/transporte-escolar/transporteEscolar.Web/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[D:/transporte-escolar/transporteEscolar.Web/Views/Driver/driver_ways.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyXGRyaXZlcl93YXlzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/transporte-escolar/transporteEscolar.Web/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+[D:/transporte-escolar/transporteEscolar.Web/Views/Driver/edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyXGVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/transporte-escolar/transporteEscolar.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[D:/transporte-escolar/transporteEscolar.Web/Views/Driver/index_driver.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRHJpdmVyXGluZGV4X2RyaXZlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/transporte-escolar/transporteEscolar.Web/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[D:/transporte-escolar/transporteEscolar.Web/Views/Home/home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxob21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/transporte-escolar/transporteEscolar.Web/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+[D:/transporte-escolar/transporteEscolar.Web/Views/Student/all.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxhbGwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/transporte-escolar/transporteEscolar.Web/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-55e0moqzrs
+[D:/transporte-escolar/transporteEscolar.Web/Views/Student/edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxlZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/transporte-escolar/transporteEscolar.Web/Views/Student/index_student.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxpbmRleF9zdHVkZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/transporte-escolar/transporteEscolar.Web/Views/Student/pays.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxwYXlzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/transporte-escolar/transporteEscolar.Web/Views/Way/all.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2F5XGFsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/transporte-escolar/transporteEscolar.Web/Views/Way/edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2F5XGVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/transporte-escolar/transporteEscolar.Web/Views/Way/index_ways.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2F5XGluZGV4X3dheXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

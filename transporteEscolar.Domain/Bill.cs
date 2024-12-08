@@ -1,3 +1,5 @@
+namespace transporteEscolar.Domain;
+
 public class Bills{
     public int id {set; get;}
     public float count {set; get;}

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Conductores</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #66a6ff, #89f7fe);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+
+        #drivers-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .driver-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            width: 280px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .driver-card:hover {
+            transform: scale(1.05);
+        }
+
+        .driver-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .driver-card p {
+            color: #666;
+        }
+
+        .driver-card .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .driver-card .button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .delete-button:hover {
+            background-color: #e53935;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #back-to-home {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #back-to-home:hover {
+            background-color: #007bb5;
+        }
+
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        input, select, button {
+            width: 90%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #0e8812;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 20px;
+            font-size: 18px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #rutas {
+            background-color: #8dce16;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        #rutas:hover {
+            background-color: #78b614;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <h1>Lista de Conductores</h1>
+    </div>
+
+    <div class="form-container">
+        <h2>Crear Conductor</h2>
+        <input type="text" id="name" name="name" placeholder="Nombre" required>
+        <input type="text" id="license" name="license" placeholder="Licencia" required>
+        <input type="number" id="salary" name="salary" placeholder="Salario" required>
+        <input type="number" id="wayId" name="wayId" placeholder="ID de la Ruta" required>
+        <select id="vehicle" name="vehicle" required>
+            <option value="">Seleccione un vehículo</option>
+            <option value="bus">Bus</option>
+            <option value="carro">Carro</option>
+            <option value="minibus">Minibus</option>
+        </select>
+
+        <button onclick="addDriver()">Crear Conductor</button>
+    </div>
+
+    <div id="drivers-list"></div>
+
+    <a id="back-to-home" href="/Home">Volver a Inicio</a>
+
+    <p id="error-message" class="error-message" style="display: none;"></p>
+
+    <script>
+        async function loadDrivers() {
+            const errorMessage = document.getElementById('error-message');
+            const driversListDiv = document.getElementById('drivers-list');
+
+            try {
+                const response = await fetch('/api/Driver');
+                if (!response.ok) throw new Error('Error al cargar los conductores.');
+
+                const drivers = await response.json();
+                driversListDiv.innerHTML = '';
+
+                if (drivers.length === 0) {
+                    driversListDiv.innerHTML = '<p>No hay conductores disponibles.</p>';
+                    return;
+                }
+
+                drivers.forEach(driver => {
+                    const driverElement = document.createElement('div');
+                    driverElement.classList.add('driver-card');
+                    driverElement.innerHTML = `
+                        <h3>${driver.id} - ${driver.name}</h3>
+                        <p><strong>Licencia:</strong> ${driver.license}</p>
+                        <p><strong>Salario:</strong> $${driver.salary.toFixed(2)}</p>
+                        <p><strong>Vehículo:</strong> ${driver.vehicle}</p>
+                        <button class="button" onclick="navigateToEdit(${driver.id})">Editar</button>
+                        <button class="button" id="rutas" onclick="navigateToRoutes(${driver.id})">Rutas</button>
+                        <button class="delete-button" onclick="deleteDriver(${driver.id})">Eliminar</button>
+                    `;
+                    driversListDiv.appendChild(driverElement);
+                });
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        async function addDriver() {
+            const errorMessage = document.getElementById('error-message');
+
+            const driverData = {
+                name: document.getElementById('name').value,
+                license: document.getElementById('license').value,
+                salary: parseFloat(document.getElementById('salary').value),
+                vehicle: document.getElementById('vehicle').value
+            };
+
+            const wayId = document.getElementById('wayId').value;
+
+            try {
+                const response = await fetch(`/api/Driver/${wayId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(driverData)
+                });
+
+                if (!response.ok) throw new Error('Error al agregar el conductor.');
+
+                location.reload()
+                loadDrivers();
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        async function deleteDriver(driverId) {
+            const errorMessage = document.getElementById('error-message');
+
+            try {
+                const response = await fetch(`/api/Driver/${driverId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) throw new Error('Error al eliminar el conductor.');
+
+                loadDrivers();
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        function navigateToEdit(driverId) {
+            localStorage.setItem('driverId', driverId);
+            window.location.href = '/Driver/Edit';
+        }
+
+        function navigateToRoutes(driverId) {
+            localStorage.setItem('driverId', driverId);
+            window.location.href = '/Driver/Driver_ways';
+        }
+
+        loadDrivers();
+    </script>
+</body>
+</html>
+

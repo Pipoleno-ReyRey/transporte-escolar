@@ -1,3 +1,5 @@
+namespace transporteEscolar.Domain;
+
 public class Drivers_Ways
 {
     public int idWay {set; get;}

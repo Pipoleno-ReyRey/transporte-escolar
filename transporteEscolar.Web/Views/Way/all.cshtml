@@ -1,0 +1,267 @@
+@{
+    ViewData["Title"] = "Lista de Rutas";
+}
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Rutas</title>
+    <style>
+        #header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+
+        body {
+            background: linear-gradient(to right, #66a6ff, #89f7fe);
+            font-family: Arial, sans-serif;
+        }
+
+        #ways-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .way-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            width: 280px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .way-card:hover {
+            transform: scale(1.05);
+        }
+
+        .way-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .way-card p {
+            color: #666;
+        }
+
+        .way-card .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .way-card .button:hover {
+            background-color: #45a049;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .delete-button:hover {
+            background-color: #e53935;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #back-to-home {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #back-to-home:hover {
+            background-color: #007bb5;
+        }
+
+        #add-way-form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        #add-way-form input,
+        #add-way-form select {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        #add-way-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #add-way-form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <h1>Lista de Rutas</h1>
+    </div>
+
+    <div id="add-way-form">
+        <h3>Agregar Ruta</h3>
+        <input type="text" id="origin" placeholder="Origen" required />
+        <input type="text" id="destiny" placeholder="Destino" required />
+        <input type="number" id="cost" placeholder="Costo" required />
+        <input type="time" id="time" required />
+        <button onclick="addWay()">Agregar Ruta</button>
+    </div>
+
+    <div id="ways-list">
+    </div>
+
+    <a id="back-to-home" href="/Home">Volver a Inicio</a>
+
+    <p id="error-message" class="error-message" style="display: none;"></p>
+
+    <script>
+        function editWay(wayId) {
+            localStorage.setItem('wayId', wayId);
+        }
+
+        async function loadWays() {
+            const errorMessage = document.getElementById('error-message');
+            const waysListDiv = document.getElementById('ways-list');
+
+            try {
+                const response = await fetch('/api/Way');
+
+                if (!response.ok) {
+                    const errorText = await response.text(); 
+                    throw new Error(errorText || `Error: ${response.status} ${response.statusText}`);
+                }
+
+                const ways = await response.json();
+
+                waysListDiv.innerHTML = ''; 
+                errorMessage.style.display = 'none';
+
+                if (ways.length === 0) {
+                    waysListDiv.innerHTML = '<p>No hay rutas disponibles.</p>';
+                    return;
+                }
+
+                ways.forEach(way => {
+                    const wayElement = document.createElement('div');
+                    wayElement.classList.add('way-card');
+                    wayElement.innerHTML = `
+                        <h3>${way.id} --- ${way.origin} a ${way.destiny}</h3>
+                        <p><strong>Costo:</strong> $${way.cost.toFixed(2)}</p>
+                        <p><strong>Tiempo:</strong> ${way.time}</p>
+                        <a href="/Way/Edit" class="button" onclick="editWay(${way.id})">Editar</a>
+                        <button class="delete-button" onclick="deleteWay(${way.id})">Eliminar</button>
+                    `;
+                    waysListDiv.appendChild(wayElement);
+                });
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        async function addWay() {
+            const origin = document.getElementById('origin').value;
+            const destiny = document.getElementById('destiny').value;
+            const cost = parseFloat(document.getElementById('cost').value);
+            const time = document.getElementById('time').value;
+
+            const errorMessage = document.getElementById('error-message');
+
+            const way = {
+                origin,
+                destiny,
+                cost,
+                time
+            };
+
+            try {
+                const response = await fetch('/api/Way', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(way)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || `Error: ${response.status} ${response.statusText}`);
+                }
+
+                loadWays(); 
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        async function deleteWay(wayId) {
+            const errorMessage = document.getElementById('error-message');
+            try {
+                const response = await fetch(`/api/Way/Delete/${wayId}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || `Error: ${response.status} ${response.statusText}`);
+                }
+
+                loadWays(); 
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        loadWays(); 
+    </script>
+
+</body>
+</html>

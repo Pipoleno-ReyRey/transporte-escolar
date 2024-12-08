@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas del Conductor</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #66a6ff, #89f7fe);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+
+        #ways-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .way-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            width: 280px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .way-card:hover {
+            transform: scale(1.05);
+        }
+
+        .way-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .way-card p {
+            color: #666;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #back-to-home {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #back-to-home:hover {
+            background-color: #007bb5;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Rutas del Conductor</h1>
+    </div>
+
+    <div id="ways-list">
+    </div>
+
+    <a id="back-to-home" href="/Home">Volver a Inicio</a>
+
+    <p id="error-message" class="error-message" style="display: none;"></p>
+
+    <script>
+        const driverId = localStorage.getItem('driverId');
+
+        async function loadDriverWays() {
+            const errorMessage = document.getElementById('error-message');
+            const waysListDiv = document.getElementById('ways-list');
+
+            try {
+                if (!driverId) {
+                    throw new Error('No se encontró el ID del conductor en localStorage.');
+                }
+
+                const response = await fetch(`/DriverWays/${driverId}`);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || `Error: ${response.status} ${response.statusText}`);
+                }
+
+                const ways = await response.json();
+
+                waysListDiv.innerHTML = '';
+                errorMessage.style.display = 'none';
+
+                if (ways.length === 0) {
+                    waysListDiv.innerHTML = '<p>No hay rutas disponibles para este conductor.</p>';
+                    return;
+                }
+
+                ways.forEach(way => {
+                    const wayElement = document.createElement('div');
+                    wayElement.classList.add('way-card');
+                    wayElement.innerHTML = `
+                        <h3>${way.origin} &rarr; ${way.destiny}</h3>
+                        <p><strong>Costo:</strong> $${way.cost.toFixed(2)}</p>
+                        <p><strong>hora de salida:</strong> ${way.time || 'No especificado'}</p>
+                    `;
+                    waysListDiv.appendChild(wayElement);
+                });
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        loadDriverWays();
+    </script>
+</body>
+</html>

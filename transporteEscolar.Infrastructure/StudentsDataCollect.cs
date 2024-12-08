@@ -11,7 +11,11 @@ public class StudentsData : DataInterface<Student>
         await connection1.OpenAsync();
         MySqlCommand command = new MySqlCommand($"INSERT INTO Student(name, address, telefono, email, debt, WayId) VALUES('{element.name}', '{element.address}', '{element.telefono}', '{element.email}', 0, {element.WayId});", connection1);
         command.ExecuteNonQuery();
+        command.CommandText = "SELECT LAST_INSERT_ID();";
+        int lastStudent = Convert.ToInt32(await command.ExecuteScalarAsync());
         await connection1.CloseAsync();
+        BillsData bill = new BillsData();
+        await bill.Add(lastStudent);
     }
 
     public async Task<IEnumerable<Student>> All()
@@ -90,4 +94,5 @@ public class StudentsData : DataInterface<Student>
         command.ExecuteNonQuery();
         await connection1.CloseAsync();
     }
+    
 }

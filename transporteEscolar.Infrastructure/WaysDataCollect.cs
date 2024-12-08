@@ -9,7 +9,8 @@ public class WaysData : DataInterface<Ways>
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         await connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"INSERT INTO Ways (origin, destiny, time, cost) VALUES('{element.origin}', '{element.destiny}', '{element.time}', {element.cost});", connection1);
+        string? time = TimeOnly.Parse(element.time.ToString()).ToString("HH:mm:ss");
+        MySqlCommand command = new MySqlCommand($"INSERT INTO Ways (origin, destiny, time, cost) VALUES('{element.origin}', '{element.destiny}', '{time}', {element.cost});", connection1);
         command.ExecuteNonQuery();
         await connection1.CloseAsync();
     }
@@ -78,9 +79,32 @@ public class WaysData : DataInterface<Ways>
     {
         MySqlConnection connection1 = new MySqlConnection(connection);
         await connection1.OpenAsync();
-        MySqlCommand command = new MySqlCommand($"UPDATE Ways SET origin = '{element.origin}', destiny = '{element.destiny}', time = '{element.time}', cost = {element.cost} WHERE id = {element.id};", connection1);
+        string? time = TimeOnly.Parse(element.time.ToString()).ToString("HH:mm:ss");
+        MySqlCommand command = new MySqlCommand($"UPDATE Ways SET origin = '{element.origin}', destiny = '{element.destiny}', time = '{time}', cost = {element.cost} WHERE id = {element.id};", connection1);
         command.ExecuteNonQuery();
         await connection1.CloseAsync();
     }
 
+    public async Task<IEnumerable<Ways>> GetDriverWays(int id)
+    {
+        List<Ways> ways = new List<Ways>();
+        MySqlConnection connection1 = new MySqlConnection(connection);
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"SELECT Ways.id AS WayId, Ways.origin AS Origin, Ways.destiny AS Destiny, Ways.cost AS Cost, Ways.time AS Time FROM Drivers_Ways INNER JOIN Ways ON Drivers_Ways.idWay = Ways.id WHERE Drivers_Ways.idDriver = {id};", connection1);
+        MySqlDataReader reader = command.ExecuteReader();
+        while (reader.Read())
+        {
+            Ways way = new Ways();
+            way.id = int.Parse(reader["WayId"].ToString());
+            way.origin = reader["Origin"].ToString();
+            way.destiny = reader["Destiny"].ToString();
+            float cost = 0.0f;
+            float.TryParse(reader["Cost"].ToString(), out cost);
+            way.cost = cost;
+            way.time = TimeOnly.Parse(reader["Time"].ToString());
+            ways.Add(way);
+        }
+        await connection1.CloseAsync();
+        return ways;
+    }
 }

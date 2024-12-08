@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("transporteEscolar.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ddedbc48bb9e54475da171df568ef0663c11b42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c60b855e35e3482e96b09db402e4e8d89dbaa326")]
 [assembly: System.Reflection.AssemblyProductAttribute("transporteEscolar.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("transporteEscolar.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

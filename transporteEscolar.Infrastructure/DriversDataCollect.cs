@@ -80,4 +80,21 @@ public class DriverData : DataInterface<Driver>
         await connection1.CloseAsync();
     }
 
+    public async Task AddDriverWay(int idWay)
+    {
+        int ultimoId = 0;
+        MySqlConnection connection1 = new MySqlConnection(connection);
+        await connection1.OpenAsync();
+        MySqlCommand command = new MySqlCommand($"SELECT MAX(id) AS ultimo_id FROM Driver;", connection1);
+        MySqlDataReader reader = command.ExecuteReader();
+        while(reader.Read()){
+            ultimoId = int.Parse(reader["ultimo_id"].ToString());
+        }
+        await connection1.CloseAsync();
+        
+        await connection1.OpenAsync();
+        command = new MySqlCommand($"insert into Drivers_Ways(idWay, idDriver) values({idWay}, {ultimoId});", connection1);
+        command.ExecuteNonQuery();
+        await connection1.CloseAsync();
+    }
 }

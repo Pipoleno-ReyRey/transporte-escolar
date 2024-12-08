@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos del Estudiante</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #66a6ff, #89f7fe);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+
+        #pays-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .pay-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px;
+            width: 280px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .pay-card:hover {
+            transform: scale(1.05);
+        }
+
+        .pay-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .pay-card p {
+            color: #666;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #back-to-home {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #back-to-home:hover {
+            background-color: #007bb5;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <h1>Pagos del Estudiante</h1>
+    </div>
+
+    <div id="pays-list">
+    </div>
+
+    <a id="back-to-home" href="/Home">Volver a Inicio</a>
+
+    <p id="error-message" class="error-message" style="display: none;"></p>
+
+    <script>
+        async function loadPays() {
+            const errorMessage = document.getElementById('error-message');
+            const paysListDiv = document.getElementById('pays-list');
+
+            const studentId = localStorage.getItem('studentId');
+
+            if (!studentId) {
+                errorMessage.textContent = "No se encontró el ID del estudiante en el almacenamiento local.";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/Pay/GetByStudent/${studentId}`);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText || `Error: ${response.status} ${response.statusText}`);
+                }
+
+                const pays = await response.json();
+
+                paysListDiv.innerHTML = '';
+                errorMessage.style.display = 'none';
+
+                if (pays.length === 0) {
+                    paysListDiv.innerHTML = '<p>No hay pagos registrados para este estudiante.</p>';
+                    return;
+                }
+
+                pays.forEach(pay => {
+                    const payElement = document.createElement('div');
+                    payElement.classList.add('pay-card');
+                    payElement.innerHTML = `
+                        <p><strong>Fecha:</strong> ${pay.datePay}</p>
+                        <p><strong>Monto:</strong> $${pay.count}</p>
+                    `;
+                    paysListDiv.appendChild(payElement);
+                });
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        loadPays();
+    </script>
+
+</body>
+</html>
