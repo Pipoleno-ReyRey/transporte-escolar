@@ -10,14 +10,14 @@
         "projectUniqueName": "D:\\transporte-escolar\\transporteEscolar.API\\transporteEscolar.API.csproj",
         "projectName": "transporteEscolar.API",
         "projectPath": "D:\\transporte-escolar\\transporteEscolar.API\\transporteEscolar.API.csproj",
-        "packagesPath": "C:\\Users\\wapo2\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\reysu\\.nuget\\packages\\",
         "outputPath": "D:\\transporte-escolar\\transporteEscolar.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\wapo2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\reysu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,7 +53,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -88,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -98,14 +98,14 @@
         "projectUniqueName": "D:\\transporte-escolar\\transporteEscolar.Application\\transporteEscolar.Application.csproj",
         "projectName": "transporteEscolar.Application",
         "projectPath": "D:\\transporte-escolar\\transporteEscolar.Application\\transporteEscolar.Application.csproj",
-        "packagesPath": "C:\\Users\\wapo2\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\reysu\\.nuget\\packages\\",
         "outputPath": "D:\\transporte-escolar\\transporteEscolar.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\wapo2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\reysu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -114,7 +114,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -139,7 +138,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -160,7 +160,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -170,14 +170,14 @@
         "projectUniqueName": "D:\\transporte-escolar\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj",
         "projectName": "transporteEscolar.Domain",
         "projectPath": "D:\\transporte-escolar\\transporteEscolar.Domain\\transporteEscolar.Domain.csproj",
-        "packagesPath": "C:\\Users\\wapo2\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\reysu\\.nuget\\packages\\",
         "outputPath": "D:\\transporte-escolar\\transporteEscolar.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\wapo2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\reysu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -186,7 +186,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -204,7 +203,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -225,7 +225,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
@@ -235,14 +235,14 @@
         "projectUniqueName": "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj",
         "projectName": "transporteEscolar.Infrastructure",
         "projectPath": "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\transporteEscolar.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\wapo2\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\reysu\\.nuget\\packages\\",
         "outputPath": "D:\\transporte-escolar\\transporteEscolar.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\wapo2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\reysu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -251,7 +251,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -273,7 +272,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -304,7 +304,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

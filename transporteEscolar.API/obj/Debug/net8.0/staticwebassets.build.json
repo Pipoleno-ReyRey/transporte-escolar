@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "liv7kd27tMYhDTV1mwP87r8HuFBJB9/la1R+1n+NaVc=",
+  "Hash": "Cd6NYDWJ3eVzhS+JbBoPQxhPwYNR8LcssSJPiuB7mPU=",
   "Source": "transporteEscolar.API",
   "BasePath": "_content/transporteEscolar.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

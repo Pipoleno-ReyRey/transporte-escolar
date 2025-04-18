@@ -102,3 +102,7 @@ D:\transporte-escolar\transporteEscolar.Web\obj\Debug\net8.0\refint\transporteEs
 D:\transporte-escolar\transporteEscolar.Web\obj\Debug\net8.0\transporteEscolar.Web.pdb
 D:\transporte-escolar\transporteEscolar.Web\obj\Debug\net8.0\transporteEscolar.Web.genruntimeconfig.cache
 D:\transporte-escolar\transporteEscolar.Web\obj\Debug\net8.0\ref\transporteEscolar.Web.dll
+D:\transporte-escolar\transporteEscolar.Web\bin\Debug\net8.0\transporteEscolar.API.staticwebassets.endpoints.json
+D:\transporte-escolar\transporteEscolar.Web\bin\Debug\net8.0\transporteEscolar.Web.staticwebassets.endpoints.json
+D:\transporte-escolar\transporteEscolar.Web\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\transporte-escolar\transporteEscolar.Web\obj\Debug\net8.0\staticwebassets\msbuild.transporteEscolar.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

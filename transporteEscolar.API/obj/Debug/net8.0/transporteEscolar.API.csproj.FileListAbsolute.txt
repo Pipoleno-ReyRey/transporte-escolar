@@ -36,7 +36,6 @@ D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\System.Memory.Data.
 D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\System.Runtime.Caching.dll
 D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\System.Security.Permissions.dll
-D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\System.Text.Json.dll
 D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\System.Windows.Extensions.dll
 D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\ZstdSharp.dll
 D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll
@@ -90,3 +89,6 @@ D:\transporte-escolar\transporteEscolar.API\obj\Debug\net8.0\refint\transporteEs
 D:\transporte-escolar\transporteEscolar.API\obj\Debug\net8.0\transporteEscolar.API.pdb
 D:\transporte-escolar\transporteEscolar.API\obj\Debug\net8.0\transporteEscolar.API.genruntimeconfig.cache
 D:\transporte-escolar\transporteEscolar.API\obj\Debug\net8.0\ref\transporteEscolar.API.dll
+D:\transporte-escolar\transporteEscolar.API\bin\Debug\net8.0\transporteEscolar.API.staticwebassets.endpoints.json
+D:\transporte-escolar\transporteEscolar.API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\transporte-escolar\transporteEscolar.API\obj\Debug\net8.0\staticwebassets\msbuild.transporteEscolar.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
